@@ -43,7 +43,7 @@ const Checkout = () => {
         return;
       }
 
-      const orderResponse = await fetch("http://localhost:5000/create-order", {
+      const orderResponse = await fetch("https://nryacloset.onrender.com/create-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const Checkout = () => {
           console.log("Payment response:", response);
 
           const verifyResponse = await fetch(
-            "http://localhost:5000/verify-payment",
+            "https://nryacloset.onrender.com/verify-payment",
             {
               method: "POST",
               headers: {
@@ -124,7 +124,7 @@ const Checkout = () => {
                 localStorage.setItem("lastOrder", JSON.stringify(orderData));
                 
                 
-                await fetch("http://localhost:5000/save-order",{
+                await fetch("https://nryacloset.onrender.com/save-order",{
                   method:"POST",
                   headers:{
                     "Content-Type":"application/json",

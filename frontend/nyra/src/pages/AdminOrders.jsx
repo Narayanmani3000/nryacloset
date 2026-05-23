@@ -6,7 +6,7 @@ const AdminOrders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch("http://localhost:5000/orders");
+        const response = await fetch("https://nryacloset.onrender.com/orders");
 
         const data = await response.json();
 
@@ -77,7 +77,7 @@ const AdminOrders = () => {
 
     console.log(order._id)
     await fetch(
-      `http://localhost:5000/update-order/${order._id}`,
+      `https://nryacloset.onrender.com/update-order/${order._id}`,
       {
         method: "PUT",
         headers: {

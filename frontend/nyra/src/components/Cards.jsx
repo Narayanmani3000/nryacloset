@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import discount from "../util/discountCalculator.js";
 import Image from "../components/ImageReplacement.jsx";
 import WhatsappMessage from "../util/WhatsappMessage.jsx";
+import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext.jsx";
 
 export const Cards = ({ data }) => {
   const [product, setProduct] = useState([]);
-
+  const { addToCart } = useCart();
+  const navigate = useNavigate();
   useEffect(() => {
     setProduct(data || []);
   }, [data]);
@@ -21,15 +24,17 @@ export const Cards = ({ data }) => {
             {i + 1}
           </div>
 
-          <div className="bg-gray-50 p-2">
-            <Image url={da.image} />
-          </div>
+          <Link to={`/product/${da.id}`} className="block">
+            <div className="bg-gray-50 p-2">
+              <Image url={da.image} name={da.name} />
+            </div>
 
-          <div className="space-y-2 p-3">
-            <h1 className="line-clamp-2 min-h-[40px] text-center text-sm font-bold text-blue-900 md:text-base">
+            <h1 className="line-clamp-2 min-h-[40px] px-3 text-center text-sm font-bold text-blue-900 md:text-base">
               {da.name}
             </h1>
+          </Link>
 
+          <div className="space-y-2 p-3">
             <p className="text-xs text-gray-600">
               <span className="font-semibold text-gray-800">Color:</span>{" "}
               {da.color}
@@ -60,6 +65,16 @@ export const Cards = ({ data }) => {
                 {discount(da.price, da.offer)}% OFF
               </span>
             </div>
+
+            <button
+  onClick={() => {
+    addToCart(da);
+    navigate("/cart");
+  }}
+  className="mt-2 w-full rounded-lg bg-pink-600 py-2 text-sm font-bold text-white hover:bg-pink-700"
+>
+  Add to Cart
+</button>
 
             <WhatsappMessage
               itemId={da.id}

@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { Link , useNavigate} from "react-router-dom";
 
  export function NavBar() {
   const [open, setOpen] = useState(false);
-
+  const navigate = useNavigate();
   return (
+    <>
     <nav className="w-full h-16 shadow bg-white px-4 flex items-center justify-between">
       <h1 className="font-bold text-blue-900 text-2xl">
         Nyra Closet
@@ -25,16 +27,19 @@ import { useState } from "react";
         {open ? "×" : "☰"}
       </button>
 
-      {/* Mobile Menu */}
+      
+    </nav>
+    {/* Mobile Menu */}
       {open && (
-        <div className="absolute top-16 left-0 w-full bg-white shadow-md flex flex-col items-center gap-4 py-5 font-medium text-gray-700 md:hidden">
-          <a href="#">Home</a>
+        <div className="w-full bg-white shadow-md flex flex-col items-center gap-4 py-5 font-medium text-gray-700 md:hidden">
+          <a href="#" onClick={()=> navigate(`/`)}>Home</a>
           <a href="#">Products</a>
           <a href="#">Offers</a>
-          <a href="#">Contact</a>
+          <a href="#" onClick={()=> navigate(`/contact`)} >Contact</a>
         </div>
       )}
-    </nav>
+      
+      </>
   );
 }
 

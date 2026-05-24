@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { useCart } from "../context/CartContext.jsx";
 import { useNavigate } from "react-router-dom";
+import dotenv from "dotenv";
 
 const Checkout = () => {
   const { cart, totalAmount, clearCart } = useCart();
   const navigate = useNavigate();
-
   const [customer, setCustomer] = useState({
     name: "",
     phone: "",
     address: "",
   });
-
+  
   const loadRazorpayScript = () => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -61,7 +61,7 @@ const Checkout = () => {
       }
 
       const options = {
-        key: "rzp_test_Sr9g9d0DMzltBV",
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: order.amount,
         currency: "INR",
         name: "Nyra Closet",

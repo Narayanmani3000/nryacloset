@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const AdminOrders = () => {
+
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
